@@ -143,12 +143,13 @@ export const isServer = typeof window === 'undefined'
 // export const apiHost = isDev
 //   ? host
 //   : `https://${process.env.VERCEL_URL || domain}`
-
+export const notionBaseUrl = process.env.NEXT_PUBLIC_NOTION_API_BASE_URL
 export const apiBaseUrl = process.env.NEXT_APP_API_URL
 
 export const api = {
     getDataAll: `${apiBaseUrl}/notion-list`,
     getDetailData: `${apiBaseUrl}/notion-detail`,
+    getMainData: `${apiBaseUrl}/notion-cover`,
     searchNotion: `${apiBaseUrl}/search-notion`,
     getNotionPageInfo: `${apiBaseUrl}/notion-page-info`,
     getSocialImage: `${apiBaseUrl}/social-image`
