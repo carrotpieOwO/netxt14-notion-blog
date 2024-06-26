@@ -1,8 +1,9 @@
+import { api } from "@/lib/config";
 import styles from "./page.module.css";
 import BlogList from "@/components/List";
 
 async function getData() {
-  const res = await fetch(`http:localhost:3000/api/notion-list`)
+  const res = await fetch(api.getDataAll)
   
   if (!res.ok) {
     throw new Error('Failed to fetch data')
@@ -22,10 +23,11 @@ export default async function Home() {
       createdTime: data.properties.createdAt?.date?.start || '',
       summary: data.properties.summary?.rich_text?.[0]?.plain_text || 'No summary'
   }))
-  
+
   return (
-    <main className={styles.main}>
+    <div style={{ display: 'flex', flexDirection: 'column'}}>
+      <div style={{ width: '100%', height: '120px', background: 'pink'}}>커버영역</div>
       <BlogList list={list}/>
-    </main>
+    </div>
   );
 }

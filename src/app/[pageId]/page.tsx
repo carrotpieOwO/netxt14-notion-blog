@@ -1,7 +1,8 @@
 import NotionPage from '@/components/NotionPage'
+import { api } from '@/lib/config'
 
 async function getData(pageId: string) {
-	const res = await fetch(`http:localhost:3000/api/notion-detail?pageId=${pageId}`)
+	const res = await fetch(`${api.getDetailData}?pageId=${pageId}`)
 	
 	if (!res.ok) {
 	  throw new Error('Failed to fetch data')
