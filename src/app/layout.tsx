@@ -6,10 +6,9 @@ import "./styles/prism-theme.css"
 import 'react-notion-x/src/styles.css'
 import 'prismjs/themes/prism-coy.css'
 import { Footer } from "@/components/Footer";
-import { Social } from "@/components/Social";
 import { Header } from "@/components/Header";
 import { api } from "@/lib/config";
-import { Cover } from "@/components/Cover";
+import { ListLayout } from "@/components/ListLayout";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -26,19 +25,20 @@ async function getCoverImages() {
 	return res.json()
 }
 
-export default async function RootLayout({
+export default async function Layout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  
   const coverImages = await getCoverImages()
 
   return (
     <html lang="en">
       <body className={`${inter.className}`}>
         <Header icon={coverImages.heroImage} />
-        { children }
+          <ListLayout coverImages={coverImages}>
+            { children }
+          </ListLayout>
         <Footer />
       </body>
     </html>
