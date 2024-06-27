@@ -149,7 +149,7 @@ export const apiBaseUrl = process.env.NEXT_APP_API_URL
 export const api = {
     getDataAll: `${apiBaseUrl}/notion-list`,
     getDetailData: `${apiBaseUrl}/notion-detail`,
-    getMainData: `${apiBaseUrl}/notion-cover`,
+    getMainImages: `${apiBaseUrl}/notion-cover`,
     searchNotion: `${apiBaseUrl}/search-notion`,
     getNotionPageInfo: `${apiBaseUrl}/notion-page-info`,
     getSocialImage: `${apiBaseUrl}/social-image`

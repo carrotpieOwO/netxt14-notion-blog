@@ -1,5 +1,4 @@
 import { api } from "@/lib/config";
-import styles from "./page.module.css";
 import BlogList from "@/components/List";
 
 async function getData() {
@@ -26,7 +25,6 @@ export default async function Home() {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column'}}>
-      <div style={{ width: '100%', height: '120px', background: 'pink'}}>커버영역</div>
       <BlogList list={list}/>
     </div>
   );
