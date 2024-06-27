@@ -4,6 +4,7 @@ import "./styles/globals.css";
 import "./styles/notion.css"
 import "./styles/prism-theme.css"
 import 'react-notion-x/src/styles.css'
+import 'prismjs/themes/prism-coy.css'
 import { Footer } from "@/components/Footer";
 import { Social } from "@/components/Social";
 import { Header } from "@/components/Header";
@@ -37,15 +38,7 @@ export default async function RootLayout({
     <html lang="en">
       <body className={`${inter.className}`}>
         <Header icon={coverImages.heroImage} />
-        <div className="notion-page-scroller">
-          <Cover coverImage={coverImages} />
-          <main className="notion-page notion-page-has-cover notion-page-has-icon notion-page-has-image-icon notion-full-page index-page">
-            <div className="notion-page-content notion-page-content-has-aside">
-              {children}
-              <Social />
-            </div>
-          </main>
-        </div>
+        { children }
         <Footer />
       </body>
     </html>

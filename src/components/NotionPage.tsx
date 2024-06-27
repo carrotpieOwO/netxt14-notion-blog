@@ -2,11 +2,11 @@
 import { NotionRenderer } from 'react-notion-x'
 import cs from 'classnames'
 import styles from './styles.module.css'
+import "../app/styles/notion.css"
 import Image from 'next/image'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
 import { useMemo } from 'react'
-
 
 const Code = dynamic(() =>
   import('react-notion-x/build/third-party/code').then(async (m) => {
@@ -77,17 +77,17 @@ export default function NotionPage ({recordMap}) {
   // todo: 댓글
   
   const components = useMemo(() => ({
-	nextImage: Image,
-	nextLink: Link,
-	Code,
-	Collection,
-	Equation,
-	//Pdf,
-	Modal,
-	// Header: NotionPageHeader,
-	// propertyLastEditedTimeValue,
-	//propertyTextValue,
-	// propertyDateValue
+    nextImage: Image,
+    nextLink: Link,
+    Code,
+    Collection,
+    Equation,
+    //Pdf,
+    Modal,
+    Header: () => <></>
+    // propertyLastEditedTimeValue,
+    //propertyTextValue,
+    // propertyDateValue
   }), [])
   
   return (
