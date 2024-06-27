@@ -10,9 +10,22 @@ async function getData() {
  
   return res.json()
 }
+async function getTagList() {
+  const res = await fetch(api.getTagList)
+  
+  if (!res.ok) {
+    throw new Error('Failed to fetch data')
+  }
+ 
+  return res.json()
+}
 
 export default async function Home() {
   const rawData = await getData()
+  const tagList = await getTagList();
+  console.log('taglist', tagList)
+
+  tagList.unshift({ id: 'all', name: 'all', color: 'gray', description: null })
 
   const list = rawData.map(data => ({
       id: data.id,
@@ -24,6 +37,13 @@ export default async function Home() {
   }))
 
   return (
-    <BlogList list={list}/>
+    <>
+      <div>
+      {
+        tagList.map(tag => <div key={tag.id} className={`notion-property-multi_select-item notion-item-${tag.color}`}>{tag.name}</div>)
+      }
+      </div>
+      <BlogList list={list}/>
+    </>
   );
 }
