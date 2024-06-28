@@ -1,9 +1,9 @@
 import { api } from "@/lib/config";
 import BlogList from "@/components/List";
 
-async function getData() {
-  const res = await fetch(api.getDataAll)
-  
+async function getData(tagName) {
+  const res = await fetch(`${api.getTagPosts}?tag=${tagName}`)
+
   if (!res.ok) {
     throw new Error('Failed to fetch data')
   }
@@ -11,9 +11,8 @@ async function getData() {
   return res.json()
 }
 
-export default async function Home() {
-  const rawData = await getData()
-
+export default async function TagFilteredList({ params }) {
+  const rawData = await getData(params.tagName)
 
   const list = rawData.map(data => ({
       id: data.id,

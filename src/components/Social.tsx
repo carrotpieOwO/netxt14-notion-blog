@@ -1,8 +1,6 @@
-'use client'
 import cs from 'classnames'
 import * as config from '@/lib/config'
 import styles from './PageSocial.module.css'
-import { usePathname } from 'next/navigation'
 
 interface SocialLink {
   name: string
@@ -92,11 +90,7 @@ const socialLinks: SocialLink[] = [
 ].filter(Boolean)
 
 export const Social = () => {
-  const pathname = usePathname();
   return (
-    <>
-      {
-        pathname === '/' &&
         <div className='notion-aside'>
           <div className={styles.pageSocial}>
           {socialLinks.map((action) => (
@@ -117,7 +111,5 @@ export const Social = () => {
           ))}
           </div>
       </div>
-      }
-    </>
   )
 }
