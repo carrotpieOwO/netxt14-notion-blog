@@ -26,8 +26,8 @@ export const TagList = () => {
     }, []);
 
   return (
-    <div className='notion-collection-card-property'>
-        <span className='notion-property notion-property-multi_select' style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+    <div className='notion-collection-card-property' style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+        <span className='notion-property notion-property-multi_select'>
         {
             tagList.map(tag => 
                 <Link key={tag.id} href={tag.name === 'all' ? '/' : `/tag/${tag.name}`} className={`notion-property-multi_select-item notion-item-${tag.color}`} style={{ cursor: 'pointer' }}>

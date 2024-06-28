@@ -152,7 +152,7 @@ export const api = {
     getMainImages: `${apiBaseUrl}/notion-cover`,
     getTagList: `${apiBaseUrl}/notion-taglist`,
     getTagPosts: `${apiBaseUrl}/notion-tag-posts`,
-    searchNotion: `${apiBaseUrl}/search-notion`,
+    searchNotion: `${apiBaseUrl}/notion-search`,
     getNotionPageInfo: `${apiBaseUrl}/notion-page-info`,
     getSocialImage: `${apiBaseUrl}/social-image`
 }

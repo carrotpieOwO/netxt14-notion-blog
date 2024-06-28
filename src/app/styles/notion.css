@@ -163,7 +163,43 @@
       display: none !important;
     }
   }
-  
+  .notion-category {
+    width: 900px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 1rem 0;
+    border-bottom: 1px solid #e4e4e7;
+    color: #f31260;
+  }
+  .notion-search-input {
+    border: none;
+    border-radius: 14px;
+    background: #fee7ef;
+    width: 220px;
+    height: 45px;
+    position: relative;
+    top: 0;
+  }
+  .notion-search-input input {
+    position: absolute;
+    height: 100%;
+    padding: 1rem;
+    background: transparent;
+    outline: none;
+    border: none;
+    width: 190px;
+    color: #f31260;
+  }
+  .notion-search-input svg {
+    position: absolute;
+    top: 50%;
+    bottom: 50%;
+    transform: traslateY(-50%);
+    transform: translateY(-50%);
+    right: 0;
+    margin-right: 1rem;
+  }
   .notion .notion-page-icon-cover {
     margin-left: auto;
     margin-right: auto;
