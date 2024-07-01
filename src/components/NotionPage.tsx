@@ -7,6 +7,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
 import { useMemo } from 'react'
+import { mapImageUrl } from '@/lib/map-image-url'
 
 const Code = dynamic(() =>
   import('react-notion-x/build/third-party/code').then(async (m) => {
@@ -103,11 +104,12 @@ export default function NotionPage ({recordMap}) {
         showCollectionViewDropdown={false}
         showTableOfContents
         minTableOfContentsItems={3}
+
         // defaultPageIcon={config.defaultPageIcon}
         // defaultPageCover={config.defaultPageCover}
         // defaultPageCoverPosition={config.defaultPageCoverPosition}
         // mapPageUrl={siteMapPageUrl}
-        // mapImageUrl={mapImageUrl}
+        mapImageUrl={mapImageUrl}
         // searchNotion={config.isSearchEnabled ? searchNotion : null}
         // pageAside={pageAside}
         // pageHeader={<TagList />}
