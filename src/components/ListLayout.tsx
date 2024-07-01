@@ -4,28 +4,29 @@ import { Cover } from "./Cover"
 import { Social } from "./Social"
 import { TagList } from "./TagList"
 import { useEffect, useState } from "react"
-import { FaSearch } from "@react-icons/all-files/fa/FaSearch";
 import { Search } from "./Search"
 
 
 export const ListLayout = ({ coverImages, children }) => {
     const [category, setCategory] = useState('')
     const param = useParams()
+    
     const isEmpty = Object.keys(param).length === 0;
     const hasTagKey = param.hasOwnProperty('tagName');
+    const hasSearchKey = param.hasOwnProperty('query');
 
-    console.log('parma', param)
     useEffect(() => {
         const hasTagKey = param.hasOwnProperty('tagName');
-        const hasSearch = param.hasOwnProperty('slug');
-        const category = hasTagKey ? param.tagName : hasSearch ? param.slug : 'ALL';
-        setCategory(category.toUpperCase())
+        const hasSearch = param.hasOwnProperty('query');
+        const category = hasTagKey ? param.tagName.toUpperCase() : hasSearch ? decodeURIComponent(param.query) : 'ALL';
+        setCategory(category)
+        
     }, [param])
 
     return (
         <>
             {
-                (isEmpty || hasTagKey) ?
+                (isEmpty || hasTagKey || hasSearchKey) ?
                 <div style={{ display: 'flex', flexDirection: 'column'}}>
                     <div className="notion-page-scroller">
                         <Cover coverImage={coverImages} />
@@ -34,10 +35,6 @@ export const ListLayout = ({ coverImages, children }) => {
                             <div className="notion-category">
                                 <h4>{ category }</h4>
                                 <Search />
-                                {/* <div className="notion-search-input">
-                                    <input type="text" />
-                                    <FaSearch style={{ position: 'absolute'}} />
-                                </div> */}
                             </div>
                             <div className="notion-page-content notion-page-content-has-aside">
                                 { children }

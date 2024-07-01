@@ -1,8 +1,5 @@
-'use client'
-import useDebounce from "@/hooks/useDebounce";
 import { FaSearch } from "@react-icons/all-files/fa/FaSearch"
 import { useRouter } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
 
 export const Search = () => {
     
@@ -11,10 +8,11 @@ export const Search = () => {
     const handleKeyUp = (e) => {
         
         if(e.key === 'Enter') {
-            console.log('key up e', e.key, e.target.value)
             return router.push(`/search/${e.target.value}`)
         }
-        //e.key === 'Enter' && router.push(`/search/${e.target.value}`)
+        if(e.key === 'Backspace' && e.target.value === '') {
+            return router.push(`/`)
+        }
     }
   
     return (
