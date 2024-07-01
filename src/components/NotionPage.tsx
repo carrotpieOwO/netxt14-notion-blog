@@ -8,6 +8,8 @@ import Link from 'next/link'
 import dynamic from 'next/dynamic'
 import { useMemo } from 'react'
 import { mapImageUrl } from '@/lib/map-image-url'
+import { FaArrowLeft } from "@react-icons/all-files/fa/FaArrowLeft"
+import { FaArrowUp } from "@react-icons/all-files/fa/FaArrowUp"
 
 const Code = dynamic(() =>
   import('react-notion-x/build/third-party/code').then(async (m) => {
@@ -112,8 +114,8 @@ export default function NotionPage ({recordMap}) {
         mapImageUrl={mapImageUrl}
         // searchNotion={config.isSearchEnabled ? searchNotion : null}
         // pageAside={pageAside}
-        // pageHeader={<TagList />}
-        // footer={footer}
+        pageHeader={<button className='in-page-button' onClick={() => window.history.back()}><FaArrowLeft /></button>}
+        footer={<button className='in-page-button' onClick={() => window.scrollTo({ top: 0, behavior: 'smooth'})}><FaArrowUp /></button>}
       />
   )
 }
