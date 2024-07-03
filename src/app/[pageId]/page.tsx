@@ -1,3 +1,4 @@
+import Comment from '@/components/Comment'
 import NotionPage from '@/components/NotionPage'
 import { api } from '@/lib/config'
 
@@ -15,5 +16,10 @@ export default async function Detail ({params}) {
   // todo: 댓글
   const recordMap = await getData(params.pageId)
   
-  return <NotionPage recordMap={recordMap} />
+  return (
+	<>
+		<NotionPage recordMap={recordMap} />
+		<Comment />
+	</>
+  )
 }

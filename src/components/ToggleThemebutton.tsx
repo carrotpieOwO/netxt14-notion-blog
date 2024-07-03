@@ -13,6 +13,20 @@ export const ToggleThemeButton = () => {
     useEffect(() => {
       window.localStorage.setItem('theme', theme)
       document.body.dataset.theme = theme
+
+      const isComment = document.querySelector('iframe.utterances-frame');
+      if (isComment) {
+          const utterancesTheme = theme === 'light' ? "github-light" : "photon-dark" ;
+          const utterancesEl = document.querySelector('iframe.utterances-frame') as HTMLIFrameElement;
+
+          (
+              utterancesEl?.contentWindow?.postMessage(
+              { type: "set-theme", theme: utterancesTheme },
+              "https://utteranc.es/"
+          )
+          )
+      }
+      
     }, [theme])
   
 
