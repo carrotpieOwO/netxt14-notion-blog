@@ -5,12 +5,13 @@ export const Search = () => {
     
     const router = useRouter();
 
-    const handleKeyUp = (e) => {
-        
+    const handleKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        const target = e.target as HTMLInputElement;
+
         if(e.key === 'Enter') {
-            return router.push(`/search/${e.target.value}`)
+            return router.push(`/search/${target.value}`)
         }
-        if(e.key === 'Backspace' && e.target.value === '') {
+        if(e.key === 'Backspace' && target.value === '') {
             return router.push(`/`)
         }
     }

@@ -9,10 +9,16 @@ import { useThemeStore } from "@/store/useThemeStore"
 export const ToggleThemeButton = () => {
     const [hasMounted, setHasMounted] = useState(false)
     const { theme, toggleTheme } = useThemeStore();
-  
+
+
     useEffect(() => {
       window.localStorage.setItem('theme', theme)
       document.body.dataset.theme = theme
+
+      if(theme === 'dark') {
+        const header = document.querySelector('.notion-header');
+        header?.classList.add('dark-mode')
+      }
 
       const isComment = document.querySelector('iframe.utterances-frame');
       if (isComment) {
@@ -31,6 +37,7 @@ export const ToggleThemeButton = () => {
   
 
     useEffect(() => {
+      
       setHasMounted(true)
     }, [])
   

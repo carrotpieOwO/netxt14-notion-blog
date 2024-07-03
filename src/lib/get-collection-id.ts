@@ -18,7 +18,7 @@ export const getPageCollectionId = async (pageId: string) => {
     let res = await axios.post('https://www.notion.so/api/v3/loadPageChunk',
         { "pageId": getFullBlockId(pageId), "limit": 50, "cursor": { "stack": [] }, "chunkNumber": 0, "verticalColumns": false },
         {
-            header: { 'content-type': 'application/json;charset=UTF-8' }
+            headers: { 'content-type': 'application/json;charset=UTF-8' }
         })
     let collectionId = Object.entries(res.data.recordMap.collection)[0][0]
     return collectionId

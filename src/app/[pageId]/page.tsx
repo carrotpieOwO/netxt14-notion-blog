@@ -12,7 +12,7 @@ async function getData(pageId: string) {
 }
 
 
-export default async function Detail ({params}) {
+export default async function Detail ({params}: {params: { pageId: string }}) {
   // todo: 댓글
   const recordMap = await getData(params.pageId)
   

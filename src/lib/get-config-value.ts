@@ -6,7 +6,7 @@ if (!rawSiteConfig) {
 }
 
 // allow environment variables to override site.config.ts
-let siteConfigOverrides: SiteConfig
+let siteConfigOverrides: SiteConfig | {} = {}
 
 try {
   if (process.env.NEXT_PUBLIC_SITE_CONFIG) {
@@ -23,7 +23,7 @@ const siteConfig: SiteConfig = {
 }
 
 export function getSiteConfig<T>(key: string, defaultValue?: T): T {
-  const value = siteConfig[key]
+  const value = siteConfig[key] 
 
   if (value !== undefined) {
     return value

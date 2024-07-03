@@ -1,5 +1,8 @@
+import { StaticImport } from "next/dist/shared/lib/get-img-props"
 import Image from "next/image"
-export const Cover = ({coverImage}) => {
+
+export type CoverImages = {coverImage: { coverImage: string | StaticImport, heroImage: string | StaticImport }}
+export const Cover = ({coverImage}: CoverImages) => {
     return (
             <>
                 <div className="notion-page-cover-wrapper">

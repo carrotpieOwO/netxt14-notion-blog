@@ -1,8 +1,9 @@
+import { CustomPage } from "@/app/page";
 import Image from "next/image";
 import Link from "next/link";
 
 
-export default function BlogList ({ list }) {
+export default function BlogList ({ list }: {list: CustomPage[]}) {
     return (        
         <article className="notion-page-content-inner">
             <div className="notion-collection ">

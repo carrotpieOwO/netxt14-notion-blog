@@ -3,15 +3,17 @@ import { useParams } from "next/navigation"
 import { Cover } from "./Cover"
 import { Social } from "./Social"
 import { TagList } from "./TagList"
-import { useEffect, useState } from "react"
+import { ReactNode, useEffect, useState } from "react"
 import { Search } from "./Search"
 import { useThemeStore } from "@/store/useThemeStore"
+import { StaticImport } from "next/dist/shared/lib/get-img-props"
 
-
-export const ListLayout = ({ coverImages, children }) => {
+export const ListLayout = ({ coverImages, children } : { coverImages: { coverImage: string | StaticImport, heroImage: string | StaticImport }, children: ReactNode }) => {
     const [category, setCategory] = useState('')
     const { theme } = useThemeStore()
-    const param = useParams()
+//    const param = useParams<RouteParams>()
+    const param = useParams<any>();
+
     
     const isEmpty = Object.keys(param).length === 0;
     const hasTagKey = param.hasOwnProperty('tagName');

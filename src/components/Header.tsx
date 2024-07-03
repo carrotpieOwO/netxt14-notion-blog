@@ -4,9 +4,10 @@ import Link from "next/link"
 import { ToggleThemeButton } from "./ToggleThemebutton"
 import { useThemeStore } from "@/store/useThemeStore"
 
-export const Header = ({ icon }) => {
-    const { theme } = useThemeStore();
 
+export const Header = ({ icon }: { icon: string }) => {
+    const { theme } = useThemeStore();
+    
     return (
         <header className={`notion-header ${theme === 'dark' ? 'dark-mode' : ''}`}>
             <div className='notion-nav-header'>
