@@ -20,7 +20,10 @@ body {
   font-family: var(--notion-font);
   overflow-x: hidden;
 }
-
+body[data-theme="dark"] {
+  background-color: #2f3437;
+  color: #fff;
+}
 .static-tweet blockquote {
   margin: 0;
   margin-block-start: 0;

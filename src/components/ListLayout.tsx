@@ -5,10 +5,12 @@ import { Social } from "./Social"
 import { TagList } from "./TagList"
 import { useEffect, useState } from "react"
 import { Search } from "./Search"
+import { useThemeStore } from "@/store/useThemeStore"
 
 
 export const ListLayout = ({ coverImages, children }) => {
     const [category, setCategory] = useState('')
+    const { theme } = useThemeStore()
     const param = useParams()
     
     const isEmpty = Object.keys(param).length === 0;
@@ -27,7 +29,7 @@ export const ListLayout = ({ coverImages, children }) => {
         <>
             {
                 (isEmpty || hasTagKey || hasSearchKey) ?
-                <div style={{ display: 'flex', flexDirection: 'column'}}>
+                <div style={{ display: 'flex', flexDirection: 'column'}} className={ theme === 'dark' ? 'dark-mode' : ''}>
                     <div className="notion-page-scroller">
                         <Cover coverImage={coverImages} />
                         <main className="notion-page notion-page-has-cover notion-page-has-icon notion-page-has-image-icon notion-full-page index-page">

@@ -1,13 +1,16 @@
+'use client'
 import Image from "next/image"
 import Link from "next/link"
+import { ToggleThemeButton } from "./ToggleThemebutton"
+import { useThemeStore } from "@/store/useThemeStore"
 
 export const Header = ({ icon }) => {
+    const { theme } = useThemeStore();
 
     return (
-        <header className='notion-header'>
+        <header className={`notion-header ${theme === 'dark' ? 'dark-mode' : ''}`}>
             <div className='notion-nav-header'>
                 <div className='breadcrumbs'>
-                    {/* <ToggleThemeButton /> */}
                     <Link href={'/'} className="bradscrumb">
                         <div className="notion-page-icon-inline notion-page-icon-image">
                             <span>
@@ -16,9 +19,7 @@ export const Header = ({ icon }) => {
                         </div>
                         <span className="title">Ha0peno</span>
                     </Link>
-                    <div>toggle</div>
-                    <div>search</div>
-                    {/* {isSearchEnabled && <Search block={block} title={null} />} */}
+                    <ToggleThemeButton />
                 </div>
             </div>
         </header>

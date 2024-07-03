@@ -36,9 +36,9 @@ export default async function Layout({
     <html lang="en">
       <body className={`${inter.className}`}>
         <Header icon={coverImages.heroImage} />
-          <ListLayout coverImages={coverImages}>
-            { children }
-          </ListLayout>
+        <ListLayout coverImages={coverImages}>
+          { children }
+        </ListLayout>
         <Footer />
       </body>
     </html>

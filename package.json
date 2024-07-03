@@ -24,7 +24,8 @@
     "react": "^18",
     "react-dom": "^18",
     "react-notion-x": "^6.16.0",
-    "sharp": "^0.33.4"
+    "sharp": "^0.33.4",
+    "zustand": "^4.5.4"
   },
   "devDependencies": {
     "@types/node": "^20",

@@ -6,10 +6,11 @@ import "../app/styles/notion.css"
 import Image from 'next/image'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
-import { useMemo } from 'react'
+import { useEffect, useMemo } from 'react'
 import { mapImageUrl } from '@/lib/map-image-url'
 import { FaArrowLeft } from "@react-icons/all-files/fa/FaArrowLeft"
 import { FaArrowUp } from "@react-icons/all-files/fa/FaArrowUp"
+import { useThemeStore } from '@/store/useThemeStore'
 
 const Code = dynamic(() =>
   import('react-notion-x/build/third-party/code').then(async (m) => {
@@ -78,6 +79,7 @@ const Modal = dynamic(
 
 export default function NotionPage ({recordMap}) {
   // todo: 댓글
+  const { theme } = useThemeStore()
   
   const components = useMemo(() => ({
     nextImage: Image,
@@ -96,7 +98,7 @@ export default function NotionPage ({recordMap}) {
   return (
     <NotionRenderer
         bodyClassName={cs(styles.notion)}
-        darkMode={false} //todo
+        darkMode={theme === 'dark'}
         components={components}
         recordMap={recordMap}
         rootPageId={process.env.NEXT_PUBLIC_NOTION_API_BASE_URL}
