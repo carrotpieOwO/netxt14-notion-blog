@@ -5,6 +5,7 @@ import styles from './PageSocial.module.css'
 import { useModalStore } from '@/store/useModalStore'
 import GuestBook from './GuestBook'
 import { TbMessageCircle2Filled } from "react-icons/tb";
+import { useEffect } from 'react'
 
 const socialLinks: any[] = [
   config.twitter && {
@@ -99,6 +100,11 @@ export const Social = () => {
   const handleOpen = () => {
     setOpen(true)
   }
+
+  useEffect(() => {
+    return () => setOpen(false)
+  }, [])
+  
   return (
         <div className='notion-aside'>
           <div className={styles.pageSocial}>
