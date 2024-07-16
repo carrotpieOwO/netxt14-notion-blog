@@ -9,28 +9,19 @@ import { FaInstagram } from '@react-icons/all-files/fa/FaInstagram'
 import { FaGamepad } from '@react-icons/all-files/fa/FaGamepad'
 import { FaZhihu } from '@react-icons/all-files/fa/FaZhihu'
 import { IoMoonSharp } from '@react-icons/all-files/io5/IoMoonSharp'
-import { IoSunnyOutline } from '@react-icons/all-files/io5/IoSunnyOutline'
-
 import * as config from '@/lib/config'
-//import { useDarkMode } from '@/lib/use-dark-mode'
-
 import styles from './styles.module.css'
 import { useEffect, useState } from 'react'
-
-// TODO: merge the data and icons from PageSocial with the social links in Footer
+import { useModalStore } from '@/store/useModalStore'
+import { TbMessageCircle2Filled } from 'react-icons/tb'
+import { useThemeStore } from '@/store/useThemeStore'
+import { IoSunnyOutline } from '@react-icons/all-files/io5/IoSunnyOutline'
 
 export const Footer = () => {
   const [hasMounted, setHasMounted] = useState(false)
-  //const { isDarkMode, toggleDarkMode } = useDarkMode()
+  const { setOpen } = useModalStore()
   const currentYear = new Date().getFullYear()
-
-//   const onToggleDarkMode = React.useCallback(
-//     (e) => {
-//       e.preventDefault()
-//       toggleDarkMode()
-//     },
-//     [toggleDarkMode]
-//   )
+  const { theme, toggleTheme } = useThemeStore();
 
   useEffect(() => {
     setHasMounted(true)
@@ -44,13 +35,11 @@ export const Footer = () => {
         {hasMounted && (
           <a
             className={styles.toggleDarkMode}
-            href='#'
             role='button'
-            //onClick={onToggleDarkMode}
+            onClick={toggleTheme}
             title='Toggle dark mode'
           >
-            <IoMoonSharp />
-            {/* {isDarkMode ? <IoMoonSharp /> : <IoSunnyOutline />} */}
+            {theme === 'dark' ? <IoMoonSharp /> : <IoSunnyOutline />}
           </a>
         )}
       </div>
@@ -160,18 +149,18 @@ export const Footer = () => {
             <FaGamepad />
           </a>
         )}
-        {/* todo: message 넣기 */}
-        {/* {config.game && (
+        {config.guestBook && (
           <a
-            className={styles.game}
-            href={`${config.game}`}
-            title={`game ${config.author}`}
+            className={styles.messages}
+            role='button'ㄴ
+            onClick={() => setOpen(true) }
+            title={`guest book ${config.author}`}
             target='_blank'
             rel='noopener noreferrer'
           >
-            <FaGamepad />
+            <TbMessageCircle2Filled />
           </a>
-        )} */}
+        )}
       </div>
     </footer>
   )

@@ -115,6 +115,9 @@
   .game:hover {
     color: #e383a8;
   }
+  .messages:hover {
+    color: #59f373;
+  }
   .linkedin:hover {
     color: #0077b5;
   }

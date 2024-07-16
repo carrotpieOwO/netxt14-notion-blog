@@ -1,7 +1,7 @@
 import { MongoClient, MongoClientOptions } from 'mongodb'
 
 declare const global: any & { _mongo?: MongoClient };
-const url = process.env.NEXT_APP_MONGODB_URL;
+const url = process.env.NEXT_APP_MONGODB_URL as string;
 const options = {}
 
 let connectDB: MongoClient | Promise<MongoClient>
