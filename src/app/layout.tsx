@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./styles/globals.css";
 import "./styles/notion.css"
 import "./styles/prism-theme.css"
+import "../components/modal.css"
 import 'react-notion-x/src/styles.css'
 import 'prismjs/themes/prism-coy.css'
 import { Footer } from "@/components/Footer";

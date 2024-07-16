@@ -160,6 +160,18 @@ export const Footer = () => {
             <FaGamepad />
           </a>
         )}
+        {/* todo: message 넣기 */}
+        {/* {config.game && (
+          <a
+            className={styles.game}
+            href={`${config.game}`}
+            title={`game ${config.author}`}
+            target='_blank'
+            rel='noopener noreferrer'
+          >
+            <FaGamepad />
+          </a>
+        )} */}
       </div>
     </footer>
   )

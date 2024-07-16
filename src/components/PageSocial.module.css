@@ -123,7 +123,12 @@
   .game:hover {
     border-color: #e383a8;
   }
-  
+  .messages .actionBgPane {
+    background: #59f373;
+  }
+  .messages:hover {
+    border-color: #59f373;
+  }
   
   .medium .actionBgPane {
     background: #00ab6c;

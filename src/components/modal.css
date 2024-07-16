@@ -1,0 +1,221 @@
+
+.p-dialog {
+  width: 50vw;
+  height: 50vh;
+}
+.p-dialog-header { 
+  background-color: #fff;
+  padding: .5rem;
+  border: 1px solid #cecdcd;
+  border-top-right-radius: 1rem;
+  border-top-left-radius: 1rem;
+  border-bottom: none;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, .15));
+}
+.dark-mode .p-dialog-header {
+  background-color: #413f40;
+  border: 1px solid #16191d;
+}
+.p-dialog-content {
+  background-color: #fff;
+  border: 1px solid #cecdcd;
+  border-top: none;
+  border-bottom: none;
+}
+.dark-mode .p-dialog-content,
+.dark-mode .p-dialog-footer {
+  background-color: #1e1e1e;
+  border: 1px solid #16191d;
+}
+.p-dialog-footer {
+  border-bottom-right-radius: 1rem;
+  border-bottom-left-radius: 1rem;
+  border: 1px solid #cecdcd;
+  border-top: none;
+  background-color: #fff;
+}
+.p-dialog-header .header-button {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+}
+.p-dialog-header .red {
+  background: #ff5f57;
+  border: 1px solid #e2443d;
+}
+.p-dialog .header-button.green {
+  background: #dea336;
+  border: 1px solid #dea336;
+}
+.p-dialog .header-button.yellow {
+  background: #25ac32;
+  border: 1px solid #25ac32;
+}
+
+.messageContainer {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.dateGroup {
+  margin-bottom: 20px;
+}
+
+.date {
+  //background-color: #601f58;
+  color: #8b8b8b;
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0;
+  font-size: 12px;
+}
+
+.messageBox {
+  max-width: 60%;
+  padding: 10px;
+  border-radius: 15px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  word-break: break-word;
+}
+
+.myMessage {
+  background-color: #d1eaff;
+  align-self: flex-end;
+  border-bottom-right-radius: 0;
+}
+
+.otherMessage {
+  background-color: #f1f1f1;
+  align-self: flex-start;
+  border-bottom-left-radius: 0;
+}
+
+.messageContent {
+  display: flex;
+  align-items: end;
+  gap: .5rem;
+}
+.imessage p {
+  border-radius: 1.15rem;
+  line-height: 1.25;
+  max-width: 75%;
+  padding: 0.5rem .875rem;
+  position: relative;
+  word-wrap: break-word;
+}
+
+.imessage p::before,
+.imessage p::after {
+  bottom: -0.1rem;
+  content: "";
+  height: 1rem;
+  position: absolute;
+}
+.messageBox .name {
+  color: #535d65;
+  font-size: 14px;
+}
+.imessage .time {
+  font-size: 11px;
+  color: #8b8b8b;
+}
+p.from-me {
+  align-self: flex-end;
+  background-color: #248bf5;
+  color: #fff; 
+}
+
+p.from-me::before {
+  border-bottom-left-radius: 0.8rem 0.7rem;
+  border-right: 1rem solid #248bf5;
+  right: -0.35rem;
+  transform: translate(0, -0.1rem);
+}
+
+p.from-me::after {
+  background-color: #fff;
+  border-bottom-left-radius: 0.5rem;
+  right: -40px;
+  transform:translate(-30px, -2px);
+  width: 10px;
+}
+
+p[class^="from-"] {
+  margin: 0.5rem 0;
+  width: fit-content;
+}
+
+p.from-me ~ p.from-me {
+  margin: 0.25rem 0 0;
+}
+
+p.from-me ~ p.from-me:not(:last-child) {
+  margin: 0.25rem 0 0;
+}
+
+p.from-me ~ p.from-me:last-child {
+  margin-bottom: 0.5rem;
+}
+
+p.from-them {
+  align-items: flex-start;
+  background-color: #e5e5ea;
+  color: #000;
+}
+.dark-mode p.from-them {
+  background-color: #3b3b3d;
+  color: #e2e2e2;
+}
+p.from-them:before {
+  border-bottom-right-radius: 0.8rem 0.7rem;
+  border-left: 1rem solid #e5e5ea;
+  left: -0.35rem;
+  transform: translate(0, -0.1rem);
+}
+p.from-them::after {
+  background-color: #fff;
+  border-bottom-right-radius: 0.5rem;
+  left: 20px;
+  transform: translate(-30px, -2px);
+  width: 10px;
+}
+.dark-mode p.from-them:before {
+  border-left-color: #3b3b3d;
+}
+.dark-mode p.from-them::after {
+  background-color: #1e1e1e;
+}
+
+p[class^="from-"].emoji {
+  background: none;
+  font-size: 2.5rem;
+}
+
+p[class^="from-"].emoji::before {
+  content: none;
+}
+
+.no-tail::before {
+  display: none;
+}
+
+.margin-b_none {
+  margin-bottom: 0 !important;
+}
+
+.margin-b_one {
+  margin-bottom: 1rem !important;
+}
+
+.margin-t_one {
+  margin-top: 1rem !important;
+}

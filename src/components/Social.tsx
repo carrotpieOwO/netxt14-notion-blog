@@ -1,6 +1,10 @@
+'use client'
 import cs from 'classnames'
 import * as config from '@/lib/config'
 import styles from './PageSocial.module.css'
+import { useModalStore } from '@/store/useModalStore'
+import GuestBook from './GuestBook'
+import { TbMessageCircle2Filled } from "react-icons/tb";
 
 const socialLinks: any[] = [
   config.twitter && {
@@ -78,22 +82,35 @@ const socialLinks: any[] = [
         <path d="M480.07 96H160a160 160 0 1 0 114.24 272h91.52A160 160 0 1 0 480.07 96zM248 268a12 12 0 0 1-12 12h-52v52a12 12 0 0 1-12 12h-24a12 12 0 0 1-12-12v-52H84a12 12 0 0 1-12-12v-24a12 12 0 0 1 12-12h52v-52a12 12 0 0 1 12-12h24a12 12 0 0 1 12 12v52h52a12 12 0 0 1 12 12zm216 76a40 40 0 1 1 40-40 40 40 0 0 1-40 40zm64-96a40 40 0 1 1 40-40 40 40 0 0 1-40 40z"></path>
       </svg>
     )
-  }
+  },
 
+  config.guestBook && {
+    name: 'messages',
+    onClick: true,
+    title: 'messages',
+    icon: (
+      <TbMessageCircle2Filled />
+    )
+  }
 ].filter(Boolean)
 
 export const Social = () => {
+  const {setOpen} = useModalStore();
+  const handleOpen = () => {
+    setOpen(true)
+  }
   return (
         <div className='notion-aside'>
           <div className={styles.pageSocial}>
           {socialLinks.map((action) => (
               <a
-              className={cs(styles.action, styles[action.name])}
-              href={action.href}
-              key={action.name}
-              title={action.title}
-              target='_blank'
-              rel='noopener noreferrer'
+                className={cs(styles.action, styles[action.name])}
+                href={action?.href && action.href}
+                onClick={action?.onClick && handleOpen}
+                key={action.name}
+                title={action.title}
+                target='_blank'
+                rel='noopener noreferrer'
               >
               <div className={styles.actionBg}>
                   <div className={styles.actionBgPane} />
@@ -103,6 +120,7 @@ export const Social = () => {
               </a>
           ))}
           </div>
+          <GuestBook />
       </div>
   )
 }

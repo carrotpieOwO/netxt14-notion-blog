@@ -25,6 +25,7 @@ export default siteConfig({
   youtube: '/@ha0peno', // optional youtube channel name or `channel/UCGbXXXXXXXXXXXXXXXXXXXXXX`
   instagram: '/@owo.ha0',
   game: 'https://typing-tamagochi.vercel.app/',
+  guestBook: '',
   // default notion icon and cover images for site-wide consistency (optional)
   // page-specific values will override these site-wide defaults
   defaultPageIcon: null,
