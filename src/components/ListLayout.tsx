@@ -1,5 +1,5 @@
 'use client'
-import { useParams } from "next/navigation"
+import { useParams, usePathname } from "next/navigation"
 import { Cover } from "./Cover"
 import { Social } from "./Social"
 import { TagList } from "./TagList"
@@ -12,11 +12,10 @@ import { SessionProvider } from "next-auth/react"
 export const ListLayout = ({ coverImages, children } : { coverImages: { coverImage: string | StaticImport, heroImage: string | StaticImport }, children: ReactNode }) => {
     const [category, setCategory] = useState('')
     const { theme } = useThemeStore()
-//    const param = useParams<RouteParams>()
-    const param = useParams<any>();
-
-    
+    const pathname = usePathname()
+    const param = useParams<any>();    
     const isEmpty = Object.keys(param).length === 0;
+    const isLogin = pathname === '/login';
     const hasTagKey = param.hasOwnProperty('tagName');
     const hasSearchKey = param.hasOwnProperty('query');
 
@@ -31,7 +30,7 @@ export const ListLayout = ({ coverImages, children } : { coverImages: { coverIma
     return (
         <SessionProvider>
             {
-                (isEmpty || hasTagKey || hasSearchKey) ?
+                ((isEmpty && !isLogin) || hasTagKey || hasSearchKey ) ?
                 <div style={{ display: 'flex', flexDirection: 'column'}} className={ theme === 'dark' ? 'dark-mode' : ''}>
                     <div className="notion-page-scroller">
                         <Cover coverImage={coverImages} />

@@ -16,17 +16,23 @@ import { useModalStore } from '@/store/useModalStore'
 import { TbMessageCircle2Filled } from 'react-icons/tb'
 import { useThemeStore } from '@/store/useThemeStore'
 import { IoSunnyOutline } from '@react-icons/all-files/io5/IoSunnyOutline'
+import { usePathname } from 'next/navigation'
 
 export const Footer = () => {
   const [hasMounted, setHasMounted] = useState(false)
   const { setOpen } = useModalStore()
   const currentYear = new Date().getFullYear()
   const { theme, toggleTheme } = useThemeStore();
+  const pathname = usePathname();
 
   useEffect(() => {
     setHasMounted(true)
   }, [])
 
+  if(pathname === '/login') {
+    return null        
+  }
+  
   return (
     <footer className={styles.footer}>
       <div className={styles.copyright}>Copyright {currentYear} {config.author}</div>

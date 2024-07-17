@@ -3,10 +3,17 @@ import Image from "next/image"
 import Link from "next/link"
 import { ToggleThemeButton } from "./ToggleThemebutton"
 import { useThemeStore } from "@/store/useThemeStore"
+import { useEffect } from "react"
+import { usePathname } from "next/navigation"
 
 
 export const Header = ({ icon }: { icon: string }) => {
     const { theme } = useThemeStore();
+    const pathname = usePathname();
+
+    if(pathname === '/login') {
+        return null        
+    }
     
     return (
         <header className={`notion-header ${theme === 'dark' ? 'dark-mode' : ''}`}>
