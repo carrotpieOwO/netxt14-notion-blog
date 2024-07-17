@@ -10,6 +10,7 @@ import MessageFooter from './MessageFooter';
 import axios from 'axios';
 import Image from 'next/image';
 import { useSession } from 'next-auth/react';
+import { confirmDialog } from 'primereact/confirmdialog';
 dayjs.locale('ko');
 
 const getList = () => {
@@ -61,7 +62,18 @@ export default function GuestBook () {
         scrollToBottom()
     }, [list])
 
-    const deleteMessage = async (id:string) => {
+    const deleteConfirm = async (id:string) => {
+        confirmDialog({
+            message: '삭제 하시겠습니까?',
+            header: null,
+            accept: () => deleteMessage(id),
+            acceptLabel: '확인',
+            rejectLabel: '취소',
+        });
+
+    }
+    
+    const deleteMessage = async(id:string) => {
         const res = await deleteOne(id)
         if(res.status === 200) {
             getMessages()
@@ -100,7 +112,7 @@ export default function GuestBook () {
                                     <span className='time'>{dayjs(message.createdAt).format('A hh:mm')}</span>
                                 </div>
                                 { session && message.email && message.email === session?.user?.email && 
-                                    <button onClick={() => deleteMessage(message._id)}>삭제</button>
+                                    <button onClick={() => deleteConfirm(message._id)}>삭제</button>
                                 }
                             </div>
                         ))}
