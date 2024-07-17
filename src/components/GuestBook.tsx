@@ -2,50 +2,33 @@
 
 import { Dialog } from 'primereact/dialog';
 import {useModalStore} from '../store/useModalStore'
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import dayjs from 'dayjs';
-import axios from 'axios';
 import { useThemeStore } from '@/store/useThemeStore';
-import { signOut, useSession } from 'next-auth/react';
 
 import 'dayjs/locale/ko'; // 한국어 로케일
+import useGuestbook from '@/hooks/useGuestbook';
+import MessageFooter from './MessageFooter';
+import axios from 'axios';
 dayjs.locale('ko');
 
-const createPost =  (data: Record<string, string>) => {
-    return axios.post('/api/comment', data)
-};
 const getList = () => {
     return axios.get('/api/comment')
 }
 export default function GuestBook () {
     const { open, setOpen } = useModalStore()
-    const [ value, setValue ] = useState('')
-    const [ name, setName] = useState('')
-    const [ list, setList ] = useState()
     const { theme } = useThemeStore();
-    const { data: session } = useSession();
-
-    async function fetchData() {
+    const bottomRef = useRef();
+    const [ list, setList ] = useState()
+    
+    async function getMessages() {
         const response = await getList();
         setList(response.data)
     }
 
     useEffect(() => {   
-        open && fetchData();
+        open && getMessages();
     }, [open])
-
-    const handleSubmit = async () => {    
-        const formData = {
-            name: name,
-            message: value,
-            createdAt: dayjs().format('YYYY-MM-DD HH:mm:ss')
-        }
-
-        await createPost(formData)
-        setValue('')
-        setName('')
-        fetchData()
-    }
 
     const Header =  useMemo(() => {
         return (
@@ -56,26 +39,26 @@ export default function GuestBook () {
             </div>
         )
     }, [])
-    
-    const goToLogin = () => {
-        window.open('/login', 'window_name', 'width=430, height=500, location=no, status=no, scrollbars=yes')
-    }
 
-    const Footer = (
-            <>
-                { !session ?  <button onClick={goToLogin}>로그인</button>
-                : <button onClick={() => signOut()}>로그아웃</button>    
-            }
-                <input value={name as string} onChange={(e)=>setName(e.target.value)} />
-                <input value={value as string} onChange={(e)=>setValue(e.target.value)} />
-                <button onClick={handleSubmit}>전송</button>
-            </>
-        );
+    const sendCallback = () => {
+        getMessages()
+        
+    }
+    
+    const scrollToBottom = () => {
+        if (bottomRef.current) {
+            bottomRef.current.scrollIntoView();
+        }
+    };
+
+    useEffect(() => {
+        scrollToBottom()
+    }, [list])
 
     return (
         <Dialog 
             className={ `${theme === 'dark' && 'dark-mode'}` }
-            footer={Footer} 
+            footer={<MessageFooter sendCallback={sendCallback} />} 
             // icons={myIcon} 
             header={Header}
             visible={open} 
@@ -85,7 +68,6 @@ export default function GuestBook () {
             // onHide={setOpen}
             breakpoints={{'960px': '75vw', '640px': '100vw'}}
         >
-
             {
                 list &&
                 Object.keys(list).map(date => (
@@ -105,6 +87,7 @@ export default function GuestBook () {
                     </div>
                 ))
             }
+            <div ref={bottomRef} />
         </Dialog>
         
     )
