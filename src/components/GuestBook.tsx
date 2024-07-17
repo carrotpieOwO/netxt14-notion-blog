@@ -6,6 +6,8 @@ import { useEffect, useMemo, useState } from 'react'
 import dayjs from 'dayjs';
 import axios from 'axios';
 import { useThemeStore } from '@/store/useThemeStore';
+import { signOut, useSession } from 'next-auth/react';
+
 import 'dayjs/locale/ko'; // 한국어 로케일
 dayjs.locale('ko');
 
@@ -21,6 +23,7 @@ export default function GuestBook () {
     const [ name, setName] = useState('')
     const [ list, setList ] = useState()
     const { theme } = useThemeStore();
+    const { data: session } = useSession();
 
     async function fetchData() {
         const response = await getList();
@@ -54,8 +57,15 @@ export default function GuestBook () {
         )
     }, [])
     
+    const goToLogin = () => {
+        window.open('/login', 'window_name', 'width=430, height=500, location=no, status=no, scrollbars=yes')
+    }
+
     const Footer = (
             <>
+                { !session ?  <button onClick={goToLogin}>로그인</button>
+                : <button onClick={() => signOut()}>로그아웃</button>    
+            }
                 <input value={name as string} onChange={(e)=>setName(e.target.value)} />
                 <input value={value as string} onChange={(e)=>setValue(e.target.value)} />
                 <button onClick={handleSubmit}>전송</button>
