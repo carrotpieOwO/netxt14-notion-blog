@@ -38,7 +38,7 @@ export default function MessageFooter ({ sendCallback }: { sendCallback:() => vo
         confirmDialog({
             message: '로그아웃 하시겠습니까?',
             header: null,
-            accept: () => signOut(),
+            accept: () => signOut({ redirect: false }),
             acceptLabel: '확인',
             rejectLabel: '취소',
         });
@@ -59,7 +59,7 @@ export default function MessageFooter ({ sendCallback }: { sendCallback:() => vo
                 </button>    
             }
             <ConfirmDialog className={`${theme === 'dark' && 'dark-mode'}`} />
-            <input value={value as string} onChange={(e)=>setValue(e.target.value)} placeholder={ session ? '메시지를 남겨주세요.' : '로그인 후 메시지를 남겨주세요.'} />
+            <input value={value as string} onChange={(e)=>setValue(e.target.value)} placeholder={ session ? '메시지를 남겨주세요.' : '로그인 후 메시지를 남겨주세요.'} disabled={!session} />
             <button onClick={handleSubmit}><LuSendHorizonal /></button>
         </div>
     )

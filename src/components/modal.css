@@ -270,3 +270,6 @@ input:focus {
   box-shadow: 0 0 0 0.2rem #C7D2FE;
   border-color: #6366F1;
 }
+input:disabled {
+  opacity: .45;
+}
