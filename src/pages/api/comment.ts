@@ -1,6 +1,7 @@
 
 import { connectDB } from "@/utill/database";
 import dayjs from "dayjs";
+import { ObjectId } from "mongodb";
 import { NextApiRequest, NextApiResponse } from "next"
 
 export default async function handler(req:NextApiRequest, res:NextApiResponse) {
@@ -31,6 +32,18 @@ export default async function handler(req:NextApiRequest, res:NextApiResponse) {
 
         try {
             await db.collection('guestbook').insertOne(req.body)    
+
+            return res.status(200).json('success')
+
+        } catch (error) {
+            return res.status(500).json(error)  
+        }
+    }
+
+    if(req.method === 'DELETE') {
+        const id = req.query.id as string;
+        try {
+            await db.collection('guestbook').deleteOne({ _id: new ObjectId(id) })    
 
             return res.status(200).json('success')
 

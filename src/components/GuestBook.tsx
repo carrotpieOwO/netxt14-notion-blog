@@ -5,24 +5,30 @@ import {useModalStore} from '../store/useModalStore'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import dayjs from 'dayjs';
 import { useThemeStore } from '@/store/useThemeStore';
-
 import 'dayjs/locale/ko'; // 한국어 로케일
-import useGuestbook from '@/hooks/useGuestbook';
 import MessageFooter from './MessageFooter';
 import axios from 'axios';
+import Image from 'next/image';
+import { useSession } from 'next-auth/react';
 dayjs.locale('ko');
 
 const getList = () => {
     return axios.get('/api/comment')
 }
+const deleteOne = (id) => {
+    return axios.delete(`/api/comment?id=${id}`)
+}
+
 export default function GuestBook () {
     const { open, setOpen } = useModalStore()
     const { theme } = useThemeStore();
     const bottomRef = useRef();
     const [ list, setList ] = useState()
+    const { data: session } = useSession();
     
     async function getMessages() {
         const response = await getList();
+        console.log('res', response)
         setList(response.data)
     }
 
@@ -55,6 +61,13 @@ export default function GuestBook () {
         scrollToBottom()
     }, [list])
 
+    const deleteMessage = async (id:string) => {
+        const res = await deleteOne(id)
+        if(res.status === 200) {
+            getMessages()
+        }
+    }
+
     return (
         <Dialog 
             className={ `${theme === 'dark' && 'dark-mode'}` }
@@ -76,12 +89,19 @@ export default function GuestBook () {
                         {list[date].map(message => (
                             <div key={message._id} className='messageBox'>
                                 <div className=''>
+                                    {
+                                        message?.image &&
+                                        <Image src={message.image} alt={message.name} width={30} height={30} style={{ borderRadius: '50%' }} />
+                                    }
                                     <span className='name'>{message.name}</span>
                                 </div>
                                 <div className='messageContent imessage'>
                                     <p className='from-them'>{message.message}</p>
                                     <span className='time'>{dayjs(message.createdAt).format('A hh:mm')}</span>
                                 </div>
+                                { session && message.email && message.email === session?.user?.email && 
+                                    <button onClick={() => deleteMessage(message._id)}>삭제</button>
+                                }
                             </div>
                         ))}
                     </div>

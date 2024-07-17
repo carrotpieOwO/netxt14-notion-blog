@@ -26,6 +26,8 @@ export default function MessageFooter ({ sendCallback }: { sendCallback:() => vo
         const formData = {
             name: session?.user?.name,
             message: value,
+            image: session?.user?.image,
+            email: session?.user?.email,
             createdAt: dayjs().format('YYYY-MM-DD HH:mm:ss')
         }
 
@@ -54,7 +56,7 @@ export default function MessageFooter ({ sendCallback }: { sendCallback:() => vo
                 <button onClick={handleSignOut}>
                     {
                         session?.user?.image &&
-                        <Image src={session?.user?.image} alt={session?.user?.name ?? 'user-image'} width={20} height={20} style={{ borderRadius: '50%' }} />
+                        <Image src={session?.user?.image} alt={session?.user?.name ?? 'user-image'} width={30} height={30} style={{ borderRadius: '50%' }} />
                     }                    
                 </button>    
             }
