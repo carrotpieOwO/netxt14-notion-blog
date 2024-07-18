@@ -31,7 +31,7 @@ export default function MessageFooter ({ sendCallback }: { sendCallback:() => vo
             createdAt: dayjs().format('YYYY-MM-DD HH:mm:ss')
         }
 
-        await postMessage(formData)
+        await postMessage(formData as Record<string, string>)
         setValue('')
         sendCallback()
     }
@@ -46,7 +46,7 @@ export default function MessageFooter ({ sendCallback }: { sendCallback:() => vo
         });
     }
 
-    const handleKeyDown = (e) => {
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if(e.code === 'Enter') {
             handleSubmit()
         }

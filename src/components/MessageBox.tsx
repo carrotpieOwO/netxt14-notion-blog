@@ -6,12 +6,21 @@ import { confirmDialog } from "primereact/confirmdialog";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { useState } from "react";
 
-
-export default function MessageBox ({ message, deleteMessage }) {
+export type Message = {
+    _id: string,
+    name?: string,
+    message: string,
+    email?: string,
+    image?: string,
+    createdAt: string,
+    ip?: string,
+}
+export default function MessageBox ({ message, deleteMessage }: {message: Message, deleteMessage: (id:string) => void}) {
     const { data: session } = useSession();
     const [ showDelete, setShowDelete ] = useState(false);
     const isMe = message.email === session?.user?.email;
 
+    console.log('message', message)
     const deleteConfirm = async (id:string) => {
         confirmDialog({
             message: '삭제 하시겠습니까?',
@@ -22,8 +31,8 @@ export default function MessageBox ({ message, deleteMessage }) {
         });
     }
 
-    const handleHover = (bool) => {
-        setShowDelete(bool)
+    const handleHover = (bool:Boolean) => {
+        setShowDelete(bool as boolean)
     }
 
     return (
@@ -31,7 +40,7 @@ export default function MessageBox ({ message, deleteMessage }) {
             <div className=''>
                 {
                     !isMe && message?.image &&
-                    <Image src={message.image} alt={message.name} width={30} height={30} style={{ borderRadius: '50%' }} />
+                    <Image src={message.image} alt={message.name ?? '프로필사진'} width={30} height={30} style={{ borderRadius: '50%' }} />
                 }
             </div>
             {

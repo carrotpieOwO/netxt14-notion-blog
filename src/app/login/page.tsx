@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 
 export default function Login() {
     const { data: session } = useSession();
-    const [ isPopup, setIsPopup ] = useState();
+    const [ isPopup, setIsPopup ] = useState<Boolean>();
     const router = useRouter();
     
     useEffect(() => {

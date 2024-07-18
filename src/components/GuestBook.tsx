@@ -8,22 +8,21 @@ import { useThemeStore } from '@/store/useThemeStore';
 import 'dayjs/locale/ko'; // 한국어 로케일
 import MessageFooter from './MessageFooter';
 import axios from 'axios';
-import { useSession } from 'next-auth/react';
-import MessageBox from './MessageBox';
+import MessageBox, { Message } from './MessageBox';
 dayjs.locale('ko');
 
 const getList = () => {
     return axios.get('/api/comment')
 }
-const deleteOne = (id) => {
+const deleteOne = (id:string) => {
     return axios.delete(`/api/comment?id=${id}`)
 }
 
 export default function GuestBook () {
     const { open, setOpen } = useModalStore()
     const { theme } = useThemeStore();
-    const bottomRef = useRef();
-    const [ list, setList ] = useState()
+    const bottomRef = useRef<HTMLDivElement | null>(null);
+    const [ list, setList ] = useState() as any;
     
     async function getMessages() {
         const response = await getList();
@@ -76,7 +75,7 @@ export default function GuestBook () {
             //style={{width: '20vw'}} 
             modal={false}
             closable={false}
-            // onHide={setOpen}
+            onHide={setOpen}
             breakpoints={{'960px': '75vw', '640px': '100vw'}}
         >
             {
@@ -84,7 +83,7 @@ export default function GuestBook () {
                 Object.keys(list).map(date => (
                     <div key={date} className='dateGroup'>
                         <span className='date'>{dayjs(date).format('YYYY년 MM월 DD일 (dd)')}</span>
-                        {list[date].map(message => (
+                        {list[date].map((message: Message) => (
                             <MessageBox key={message._id} message={message} deleteMessage={deleteMessage} />
                         ))}
                     </div>

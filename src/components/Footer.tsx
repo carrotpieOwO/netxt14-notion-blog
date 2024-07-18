@@ -158,7 +158,7 @@ export const Footer = () => {
         {config.guestBook && (
           <a
             className={styles.messages}
-            role='button'ㄴ
+            role='button'
             onClick={() => setOpen(true) }
             title={`guest book ${config.author}`}
             target='_blank'

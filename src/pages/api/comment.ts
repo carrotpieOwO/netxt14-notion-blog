@@ -1,4 +1,5 @@
 
+import { Message } from "@/components/MessageBox";
 import { connectDB } from "@/utill/database";
 import dayjs from "dayjs";
 import { ObjectId } from "mongodb";
@@ -12,7 +13,7 @@ export default async function handler(req:NextApiRequest, res:NextApiResponse) {
         const messages = list.reduce((acc, message) => {
             const date = dayjs(message.createdAt).format('YYYY-MM-DD')
             if (!acc[date]) {
-                acc[date] = [];
+                acc[date] = [] as Message[];
             }
             acc[date].push(message);
             return acc;
