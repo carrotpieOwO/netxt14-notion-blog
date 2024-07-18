@@ -8,9 +8,8 @@ import { useThemeStore } from '@/store/useThemeStore';
 import 'dayjs/locale/ko'; // 한국어 로케일
 import MessageFooter from './MessageFooter';
 import axios from 'axios';
-import Image from 'next/image';
 import { useSession } from 'next-auth/react';
-import { confirmDialog } from 'primereact/confirmdialog';
+import MessageBox from './MessageBox';
 dayjs.locale('ko');
 
 const getList = () => {
@@ -25,7 +24,6 @@ export default function GuestBook () {
     const { theme } = useThemeStore();
     const bottomRef = useRef();
     const [ list, setList ] = useState()
-    const { data: session } = useSession();
     
     async function getMessages() {
         const response = await getList();
@@ -49,7 +47,6 @@ export default function GuestBook () {
 
     const sendCallback = () => {
         getMessages()
-        
     }
     
     const scrollToBottom = () => {
@@ -61,17 +58,6 @@ export default function GuestBook () {
     useEffect(() => {
         scrollToBottom()
     }, [list])
-
-    const deleteConfirm = async (id:string) => {
-        confirmDialog({
-            message: '삭제 하시겠습니까?',
-            header: null,
-            accept: () => deleteMessage(id),
-            acceptLabel: '확인',
-            rejectLabel: '취소',
-        });
-
-    }
     
     const deleteMessage = async(id:string) => {
         const res = await deleteOne(id)
@@ -99,28 +85,12 @@ export default function GuestBook () {
                     <div key={date} className='dateGroup'>
                         <span className='date'>{dayjs(date).format('YYYY년 MM월 DD일 (dd)')}</span>
                         {list[date].map(message => (
-                            <div key={message._id} className='messageBox'>
-                                <div className=''>
-                                    {
-                                        message?.image &&
-                                        <Image src={message.image} alt={message.name} width={30} height={30} style={{ borderRadius: '50%' }} />
-                                    }
-                                    <span className='name'>{message.name}</span>
-                                </div>
-                                <div className='messageContent imessage'>
-                                    <p className='from-them'>{message.message}</p>
-                                    <span className='time'>{dayjs(message.createdAt).format('A hh:mm')}</span>
-                                </div>
-                                { session && message.email && message.email === session?.user?.email && 
-                                    <button onClick={() => deleteConfirm(message._id)}>삭제</button>
-                                }
-                            </div>
+                            <MessageBox key={message._id} message={message} deleteMessage={deleteMessage} />
                         ))}
                     </div>
                 ))
             }
             <div ref={bottomRef} />
         </Dialog>
-        
     )
 }

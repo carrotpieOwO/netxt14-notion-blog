@@ -3,7 +3,6 @@ import cs from 'classnames'
 import * as config from '@/lib/config'
 import styles from './PageSocial.module.css'
 import { useModalStore } from '@/store/useModalStore'
-import GuestBook from './GuestBook'
 import { TbMessageCircle2Filled } from "react-icons/tb";
 import { useEffect } from 'react'
 
@@ -126,7 +125,6 @@ export const Social = () => {
               </a>
           ))}
           </div>
-          <GuestBook />
       </div>
   )
 }

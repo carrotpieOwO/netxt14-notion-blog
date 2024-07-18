@@ -110,13 +110,21 @@
   font-size: 12px;
 }
 
+.me.messageBox {
+  justify-content: end;
+  margin-left: auto;
+}
+.me .etc {
+  justify-content: end;
+  margin: 0 .5rem .5rem 0;
+}
 .messageBox {
   max-width: 60%;
   padding: 10px;
   border-radius: 15px;
   margin-bottom: 10px;
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
   position: relative;
   word-break: break-word;
 }
@@ -134,9 +142,13 @@
 }
 
 .messageContent {
+  /* display: flex;
+  align-items: end;
+  gap: .5rem; */
+}
+.imessage {
   display: flex;
   align-items: end;
-  gap: .5rem;
 }
 .imessage p {
   border-radius: 1.15rem;
@@ -144,9 +156,8 @@
   max-width: 75%;
   padding: 0.5rem .875rem;
   position: relative;
-  word-wrap: break-word;
+  word-wrap: break-word; 
 }
-
 .imessage p::before,
 .imessage p::after {
   bottom: -0.1rem;
@@ -157,10 +168,19 @@
 .messageBox .name {
   color: #535d65;
   font-size: 14px;
+  font-weight: bold;
+  margin: 0 0 .5rem .5rem;
 }
-.imessage .time {
-  font-size: 11px;
+.etc .time {
+  font-size: 9px;
   color: #8b8b8b;
+}
+.etc {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: .2rem;
+    margin: 0 0 .5rem .5rem;
 }
 p.from-me {
   align-self: flex-end;
@@ -225,7 +245,8 @@ p.from-them::after {
 .dark-mode p.from-them:before {
   border-left-color: #3b3b3d;
 }
-.dark-mode p.from-them::after {
+.dark-mode p.from-them::after, 
+.dark-mode p.from-me::after {
   background-color: #1e1e1e;
 }
 

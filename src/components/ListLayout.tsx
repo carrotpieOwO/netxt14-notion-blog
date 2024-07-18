@@ -8,6 +8,7 @@ import { Search } from "./Search"
 import { useThemeStore } from "@/store/useThemeStore"
 import { StaticImport } from "next/dist/shared/lib/get-img-props"
 import { SessionProvider } from "next-auth/react"
+import GuestBook from "./GuestBook"
 
 export const ListLayout = ({ coverImages, children } : { coverImages: { coverImage: string | StaticImport, heroImage: string | StaticImport }, children: ReactNode }) => {
     const [category, setCategory] = useState('')
@@ -50,6 +51,7 @@ export const ListLayout = ({ coverImages, children } : { coverImages: { coverIma
                 :
                 children
             }
+            <GuestBook />
         </SessionProvider>
     )
 }

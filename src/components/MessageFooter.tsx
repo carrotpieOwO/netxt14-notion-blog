@@ -46,6 +46,12 @@ export default function MessageFooter ({ sendCallback }: { sendCallback:() => vo
         });
     }
 
+    const handleKeyDown = (e) => {
+        if(e.code === 'Enter') {
+            handleSubmit()
+        }
+    }
+
     return (
         <div style={{ display: 'flex', alignItems: 'center', padding: '1rem', gap: '.5rem' }}>
             { !session 
@@ -61,7 +67,13 @@ export default function MessageFooter ({ sendCallback }: { sendCallback:() => vo
                 </button>    
             }
             <ConfirmDialog className={`${theme === 'dark' && 'dark-mode'}`} />
-            <input value={value as string} onChange={(e)=>setValue(e.target.value)} placeholder={ session ? '반갑습니다!😃 메시지를 남겨주세요.' : '👈🏻 로그인 후 메시지를 남겨주세요.'} disabled={!session} />
+            <input 
+                value={value as string} 
+                onChange={(e)=>setValue(e.target.value)}
+                onKeyDown={handleKeyDown}
+                placeholder={ session ? '반갑습니다!😃 메시지를 남겨주세요.' : '👈🏻 로그인 후 메시지를 남겨주세요.'} 
+                disabled={!session} 
+            />
             <button onClick={handleSubmit}><LuSendHorizonal /></button>
         </div>
     )
