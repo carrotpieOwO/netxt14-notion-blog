@@ -1,3 +1,0 @@
-{
-    "buildCommand": "yarn add sharp --ignore-engines  next build"
-}
