@@ -1,6 +1,9 @@
+import withPlaiceholder from '@plaiceholder/next';
+import withImages from "next-images";
+
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-    distDir: "build",
+const nextConfig = withImages({
+    //distDir: "build",
     staticPageGenerationTimeout: 300,
     images: {
       domains: [
@@ -18,7 +21,7 @@ const nextConfig = {
       dangerouslyAllowSVG: true,
       contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;"
     }
-};
+});
 
-export default nextConfig;
+export default withPlaiceholder(nextConfig);
 
