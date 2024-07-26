@@ -7,7 +7,8 @@ import { idToUuid } from 'notion-utils'
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     try {
         const notion = new NotionAPI({
-            apiBaseUrl: notionBaseUrl
+            apiBaseUrl: process.env.NEXT_PUBLIC_NOTION_API_BASE_URL,
+            authToken: process.env.NEXT_APP_NOTION_SECRET,
         })
         const response = await notion.getPage(notionBaseUrl as string)
 
