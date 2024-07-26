@@ -127,7 +127,8 @@ export const isServer = typeof window === 'undefined'
 
   console.log()
 export const notionBaseUrl = process.env.NEXT_PUBLIC_NOTION_API_BASE_URL
-export const apiBaseUrl = `${process.env.NEXT_PUBLIC_API_URL}/api`
+export const apiBaseUrl = `https://${process.env.VERCEL_URL}/api`
+//`${process.env.NEXT_PUBLIC_API_URL}/api`
 
 export const api = {
     getDataAll: `${apiBaseUrl}/notion-list`,
