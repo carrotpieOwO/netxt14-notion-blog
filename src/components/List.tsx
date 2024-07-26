@@ -32,8 +32,8 @@ export default function BlogList ({ list }: {list: CustomPage[]}) {
                                                     src={li.cover}
                                                     fill
                                                     style={{ borderRadius: '14px' }}
-                                                    placeholder="blur"
-                                                    blurDataURL={li.blur}
+                                                    //placeholder="blur"
+                                                    //blurDataURL={li.blur}
                                                     // width={270}
                                                     // height={270}
                                                 />
