@@ -10,7 +10,7 @@ export default siteConfig({
 
   // basic site info (required)
   name: 'ha0peno notion blog',
-  domain: 'ha0peno.work',
+  domain: process.env.NEXT_PUBLIC_API_URL,
   author: 'ha0peno',
 
   // open graph metadata (optional)
