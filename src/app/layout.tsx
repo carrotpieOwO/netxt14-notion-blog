@@ -20,9 +20,10 @@ export const metadata: Metadata = {
 async function getCoverImages() {
 	const res:any = await fetch(api.getMainImages)
 	
-	if (!res.ok) {
-	  throw new Error('Failed to fetch data:::', res)
-	}
+  console.log('res', res)
+	// if (!res.ok) {
+	//   throw new Error('Failed to fetch data:::', res)
+	// }
 	return res.json()
 }
 
