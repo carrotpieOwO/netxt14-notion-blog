@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+    distDir: "build",
     staticPageGenerationTimeout: 300,
     images: {
       domains: [
