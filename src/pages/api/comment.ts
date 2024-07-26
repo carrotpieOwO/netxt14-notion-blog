@@ -10,7 +10,7 @@ export default async function handler(req:NextApiRequest, res:NextApiResponse) {
     if(req.method === 'GET') {
         const list = await db.collection('guestbook').find({}).toArray()
         
-        const messages = list.reduce((acc, message) => {
+        const messages = list.reduce((acc:any, message) => {
             const date = dayjs(message.createdAt).format('YYYY-MM-DD')
             if (!acc[date]) {
                 acc[date] = [] as Message[];
