@@ -125,9 +125,8 @@ export const isServer = typeof window === 'undefined'
 //   ? 'localhost:3000/'
 //   : `https://${process.env.VERCEL_URL || domain}`
 
-  console.log()
 export const notionBaseUrl = process.env.NEXT_PUBLIC_NOTION_API_BASE_URL
-export const apiBaseUrl = isDev ? 'http://localhost:3000/api' : `https://${process.env.VERCEL_URL}/api`
+export const apiBaseUrl = isDev || !process.env.VERCEL_URL ? 'http://localhost:3000/api' : `https://${process.env.VERCEL_URL}/api`
 //`${process.env.NEXT_PUBLIC_API_URL}/api`
 
 export const api = {
