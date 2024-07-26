@@ -8,6 +8,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     try {
         const notion = new NotionAPI()
         const response = await notion.getPage(notionBaseUrl as string)
+
+        console.log('api res', notionBaseUrl, response)
         const block = response.block
         const id = idToUuid(notionBaseUrl)
         const coverUrl = block[id].value.format?.page_cover
