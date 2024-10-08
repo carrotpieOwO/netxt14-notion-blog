@@ -21,11 +21,17 @@ async function getCoverImages() {
 	const res:any = await fetch(api.getMainImages)
 	
   console.log('res', res, process.env.NEXT_PUBLIC_NOTION_API_BASE_URL)
-	if (!res.ok) {
+
+  try {
+    if (!res.ok) {
+      return ''
+      //throw new Error('Failed to fetch data:::', res)
+    }
+    return res.json()  
+  } catch (error) {
     return ''
-	  //throw new Error('Failed to fetch data:::', res)
-	}
-	return res.json()
+  }
+	
 }
 
 export default async function Layout({
